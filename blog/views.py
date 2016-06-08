@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post
+from .forms import CommentForm
 
 def index(request):
 	post_list = Post.objects.all()
@@ -13,6 +14,9 @@ def comment_new(request, post_pk):
 	if request.method == "POST":
 		form = CommentForm(request.POST)
 		if form.is_valid():
+			comment = form.save(commit=False)
+			comment.post = get_object_or_404(Post, pk=post_pk)
+			comment.user = request.user
 			comment = form.save()
 			return redirect('blog:post_detail', post_pk)
 	else : 
