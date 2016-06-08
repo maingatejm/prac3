@@ -1,15 +1,18 @@
 {% extends "blog/base.html" %}
 
 {% block content %}
+<div class="row">
+	{% for post in post_list %}
+	<div class="col-sm-4">
+		<img src="{{ post.photo.url }}" style="max-width: 100%;" />
+		<div class="caption">
+			<a href="{% url "blog:post_detail" post.pk %}">
+				{{ post.title}}
+			</a>
+		</div>
+	</div>
+	{% endfor %}	
+</div>
 
-<ul>
-{% for post in post_list %}
-	<li>
-	<a href = "{% url "blog:post_detail" post.pk %}">
-	{{ post.title }}
-	</a>
-	</li>
-{% endfor %}
-</ul>
 
 {% endblock %}

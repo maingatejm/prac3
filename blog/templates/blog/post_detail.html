@@ -2,16 +2,17 @@
 
 {% block content %}
 
-<h1> {{ post.title }}</h1>
+<h1>{{ post.title }}</h1>
 
 {{post.created_at}}
 {{post.updated_at}}
 <hr/>
 
-<img src="{{ post.photo.url }}"/>
-{{post.content|linebreaks}}
-<hr/>
+<img src = "{{ post.photo.url }}" />
 
-<a href="{% url "blog:index" %}"> 글목록</a>
+{{ post.content|linebreaks}}
+
+<hr/>
+<a href ="{% url "blog:index" %}">글 목록</a>
 
 {% endblock %}
