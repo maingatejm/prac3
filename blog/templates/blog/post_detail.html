@@ -12,6 +12,17 @@
 
 {{ post.content|linebreaks}}
 
+<h3>댓글</h3>
+<a href ="{% url "blog:comment_new" post.pk %}" class = "btn btn-primary btn-block">댓글쓰기</a>
+<ul>
+{% for comment in post.comment_set.all %}
+<li>
+{{comment.message}} by {{comment.user}} {{comment.created_at}}
+</li>
+{% endfor %}
+</ul>
+
+
 <hr/>
 <a href ="{% url "blog:index" %}">글 목록</a>
 
