@@ -1,4 +1,5 @@
 from django.db import models
+from djnago.conf import settings
 
 class Post(models.Model):
 	title = models.CharField(max_length = 100)
@@ -9,3 +10,10 @@ class Post(models.Model):
 
 	def __str__(self):
 		return self.title
+
+class Comment(models.Model):
+	post = models.ForeignKey(Post)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL)
+	message = models.TextField()
+	created_at = models.DateTimeField(auto_now_add = True)
+	updated_at = models.DateTimeField(auto_now = True)
